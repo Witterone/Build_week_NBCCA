@@ -17,7 +17,6 @@ class NBCC():
         self.features = []
         self.length = 0
         self.target_data = {}
-        self.featcube = []
         self.TSGFWP = {}
         self.targetUS = None
         self.probGtarget = {}
@@ -56,8 +55,8 @@ class NBCC():
         
         
         for i in self.features.T:
-            f = self.feature(i)
-            self.featcube.append(f)
+             self.feature(i)
+            
             
       
         
@@ -117,11 +116,11 @@ class NBCC():
     def predict(self,test_data):
         final_prediction = []
         for row in test_data:
-            size = len(self.featcube)
+            size = len(row)
             pred_votes =[]
             for ln in range(size):
                 f_v = row[ln]
-                vote = self.featcube[ln].TSGFWP[f_v]
+                vote = self.TSGFWP[f_v]
                 pred_votes.append(vote)
             
             prediction = self.most_frequent(pred_votes)
